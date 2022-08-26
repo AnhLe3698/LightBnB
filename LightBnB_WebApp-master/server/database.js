@@ -1,6 +1,5 @@
 const properties = require('./json/properties.json');
 const users = require('./json/users.json');
-const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
 /// Users
 
@@ -82,7 +81,7 @@ const addUser =  function(user) {
       $3)
       RETURNING *`, [`${user.name}`, `${user.email}`, `${pass}`])
     .then((result) => {
-      console.log(result.row[0]);
+      
       if (result) {
         return result.rows[0];
       } else {
@@ -105,11 +104,32 @@ exports.addUser = addUser;
  */
 
 const getAllReservations = function(guest_id, limit = 10) {
-  return getAllProperties(null, 2);
+  return pool
+    .query(`SELECT reservations.id, properties.title, properties.thumbnail_photo_url, properties.number_of_bedrooms,
+    properties.number_of_bathrooms, properties.parking_spaces, reservations.end_date,
+    properties.cost_per_night, reservations.start_date, avg(rating) as average_rating
+    FROM reservations
+    JOIN properties ON reservations.property_id = properties.id
+    JOIN property_reviews ON properties.id = property_reviews.property_id
+    WHERE reservations.guest_id = $1
+    GROUP BY properties.id, reservations.id
+    ORDER BY reservations.start_date
+    LIMIT $2`, [guest_id, limit])
+    .then((result) => {
+      
+      if (result) {
+        return result.rows;
+      } else {
+        return null;
+      }
+      
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 }
 exports.getAllReservations = getAllReservations;
 
-/// Properties
 
 
 /**
