@@ -2,13 +2,48 @@
 
 ## Description
 
-This project co
+This project integrates a database into the backend to create a simple fullstack application mimicing some of AirBnB's functionality. 
 
 ## Screenshots
 
+Home Page
+!["screenshot description"](./resources/images/home.png)
+
+Filtering Searches
+!["screenshot description"](./resources/images/custome_searches.png)
+
+Filtering Results
+!["screenshot description"](./resources/images/filtered_search.png)
+
+Log In to Access Reservations History
+!["screenshot description"](./resources/images/personal%20reservations.png)
+
 ## Getting Started
 
+### Adding the initial Database
+- launch PostgreSQL ex. psql in terminal
+- run: CREATE DATABASE lightbnb;
+- run: \c lightbnb;
+- run: \i database_init/migrations/01_schema.sql;
+- run: \i database_init/seeds/01_seeds.sql;
+- run: \i database_init/seeds/02_seeds.sql;
+
+### Starting server
+- Install all dependencies (using the `npm install` command).
+- Navigate into correct directory using the `cd LightBnB_WebApp-master` command.
+- Run  `npm run local`
+- navigate into the  browser and type in `localhost:3000` to visit the webpage
+
+
+
 ## Dependencies
+
+- pg - Postgress Javascript library
+- nodemon
+- express
+- cookie-session
+- body-parser
+- bcrypt
 
 ## Project Structure
 
@@ -38,20 +73,23 @@ This project co
 |    └── userRoutes.js
 |
 |
-└── database_initialization
-    ├── 1_queries
-    |   ├── 1_questions.sql
-    |   ├── 2_averageDuration.sql
-    |   ├── 3_listingsByCity.sql
-    |   ├── 4_mostVisitedCities
-    |   └── 5_AllMyReservations.sql
-    |
-    ├── migrations
-    |   └── 01_schema.sql
-    |
-    └── seeds
-        ├── 01_seeds.sql
-        └── 02_seeds.sql
+├── database_initialization
+|    ├── 1_queries
+|    |   ├── 1_questions.sql
+|    |   ├── 2_averageDuration.sql
+|    |   ├── 3_listingsByCity.sql
+|    |   ├── 4_mostVisitedCities
+|    |   └── 5_AllMyReservations.sql
+|    |
+|    ├── migrations
+|    |   └── 01_schema.sql
+|    |
+|    └── seeds
+|        ├── 01_seeds.sql
+|        └── 02_seeds.sql
+|
+└──resources
+    └──images
 ```
 
 * `public` contains all of the HTML, CSS, and client side JavaScript. 
