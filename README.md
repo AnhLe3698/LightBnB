@@ -73,7 +73,7 @@ Log In to Access Reservations History
 |    └── userRoutes.js
 |
 |
-├── database_initialization
+├── database_init
 |    ├── 1_queries
 |    |   ├── 1_questions.sql
 |    |   ├── 2_averageDuration.sql
